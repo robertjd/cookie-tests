@@ -4,7 +4,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
       function doAjax(domain){
-        $.ajax('SCHEME' + domain + 'AJAX_URI');
+        $.ajax(domain + 'AJAX_URI');
       }
     </script>
   </head>
@@ -57,7 +57,7 @@
 
       <hr>
       <h3>AJAX (cross-domain) experiemnt</h3>
-      <p>Can cookies be set on an ajax request to anoter domain? Click the button, then go to <a href="SCHEMEOTHER_DOMAIN">OTHER_DOMAIN</a> - when you arrive you should see the value of the cookie that was set during the button click</p>
+      <p>Can cookies be set on an ajax request to anoter domain? Click the button, then go to <a href="OTHER_DOMAIN">OTHER_DOMAIN</a> - when you arrive you should see the value of the cookie that was set during the button click</p>
       <p>THIS IS NOT WORKING RIGHT NOW</p>
       <p>
         <a class="btn btn-success btn-lg" onClick="doAjax('OTHER_DOMAIN');">Ajax me (OTHER_DOMAIN)</a>

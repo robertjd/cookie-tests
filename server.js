@@ -1,18 +1,14 @@
 var http = require('http');
 var fs = require('fs');
-
+var url = require('url');
 var Cookies = require('cookies');
 var open = require('open');
 var uuid = require('node-uuid');
 
 var IS_PRODUCTION = process.env.NODE_ENV==='production';
-
-
-var PORT = process.env.PORT || 8001;
-
-var SCHEME = process.env.SCHEME || 'http://';
-var THIS_DOMAIN = process.env.THIS_DOMAIN || 'a.com';
-var OTHER_DOMAIN = process.env.OTHER_DOMAIN || 'b.com';
+var THIS_DOMAIN = process.env.THIS_DOMAIN || 'http://a.com';
+var OTHER_DOMAIN = process.env.OTHER_DOMAIN || 'http://b.com';
+var PORT = process.env.PORT || url.parse(THIS_DOMAIN,true).port || 8001;
 
 
 var REDIRECT_COOKIE_KEY = 'redirect-cookie';
@@ -32,8 +28,8 @@ function startServer(){
       res.writeHead(302, {
         'Cache-Control': 'no-store',
         'Pragma': 'no-cache',
-        'Location': SCHEME + OTHER_DOMAIN,
-        'Set-Cookie': makeCookie(REDIRECT_COOKIE_KEY,uuid(),THIS_DOMAIN)
+        'Location': OTHER_DOMAIN,
+        'Set-Cookie': makeCookie(REDIRECT_COOKIE_KEY,uuid(),url.parse(THIS_DOMAIN,true).hostname)
       });
       res.end();
     }else if(req.url===AJAX_URI){
@@ -41,14 +37,14 @@ function startServer(){
         res.writeHead(200, {
           'Cache-Control': 'no-store',
           'Pragma': 'no-cache',
-          'Access-Control-Allow-Origin': SCHEME + OTHER_DOMAIN
+          'Access-Control-Allow-Origin': OTHER_DOMAIN
         });
       }else{
         res.writeHead(200, {
           'Cache-Control': 'no-store',
           'Pragma': 'no-cache',
-          'Access-Control-Allow-Origin': SCHEME + OTHER_DOMAIN,
-          'Set-Cookie': makeCookie(AJAX_COOKIE_KEY,uuid(),THIS_DOMAIN)
+          'Access-Control-Allow-Origin': OTHER_DOMAIN,
+          'Set-Cookie': makeCookie(AJAX_COOKIE_KEY,uuid(),url.parse(THIS_DOMAIN,true).hostname)
         });
       }
       res.end();
@@ -63,14 +59,14 @@ function startServer(){
           .replace(/REDIRECT_COOKIE/g,cookies.get(REDIRECT_COOKIE_KEY) || 'Not Found')
           .replace(/AJAX_COOKIE/g,cookies.get(AJAX_COOKIE_KEY) || 'Not Found')
           .replace(/THIS_DOMAIN/g,THIS_DOMAIN)
-          .replace(/SCHEME/g,SCHEME)
-          .replace(/AJAX_URI/g, IS_PRODUCTION ? AJAX_URI : (':'+PORT+AJAX_URI))
+          // .replace(/SCHEME/g,SCHEME)
+          .replace(/AJAX_URI/g, AJAX_URI)
           .replace(/OTHER_DOMAIN/g,OTHER_DOMAIN);
       res.end(page);
     }
   }).listen(PORT,function(){
     if(!IS_PRODUCTION){
-      open('http://'+THIS_DOMAIN+':'+PORT);
+      open(THIS_DOMAIN);
     }
   });
 
