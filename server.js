@@ -17,6 +17,7 @@ var OTHER_DOMAIN = process.env.OTHER_DOMAIN || 'b.com';
 
 var REDIRECT_COOKIE_KEY = 'redirect-cookie';
 var AJAX_COOKIE_KEY = 'ajax-cookie';
+var AJAX_URI = '/ajax';
 
 function makeCookie(key,value,domain){
   return key + "="+value+"; Domain="+domain+"; Path=/; Expires=Wed, 13 Jan 2021 22:23:01 GMT; HttpOnly";
@@ -35,7 +36,7 @@ function startServer(){
         'Set-Cookie': makeCookie(REDIRECT_COOKIE_KEY,uuid(),THIS_DOMAIN)
       });
       res.end();
-    }else if(req.url==='/ajax'){
+    }else if(req.url===AJAX_URI){
       if(req.method==='OPTIONS'){
         res.writeHead(200, {
           'Cache-Control': 'no-store',
@@ -61,7 +62,7 @@ function startServer(){
           .replace(/REDIRECT_COOKIE/g,cookies.get(REDIRECT_COOKIE_KEY) || 'Not Found')
           .replace(/AJAX_COOKIE/g,cookies.get(AJAX_COOKIE_KEY) || 'Not Found')
           .replace(/THIS_DOMAIN/g,THIS_DOMAIN)
-          .replace(/PORT/g,PORT)
+          .replace(/AJAX_URI/g,IS_PRODUCTION ? AJAX_URI : (':'+PORT+AJAX_URI))
           .replace(/OTHER_DOMAIN/g,OTHER_DOMAIN);
       res.end(page);
     }
