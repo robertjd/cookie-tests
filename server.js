@@ -44,6 +44,7 @@ function startServer(){
           'Cache-Control': 'no-store',
           'Pragma': 'no-cache',
           'Access-Control-Allow-Origin': OTHER_DOMAIN,
+          'Access-Control-Allow-Credentials': 'true',
           'Set-Cookie': makeCookie(AJAX_COOKIE_KEY,uuid(),url.parse(THIS_DOMAIN,true).hostname)
         });
       }
