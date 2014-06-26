@@ -19,9 +19,19 @@
     <div class="container">
       <p>&nbsp;</p>
       <h1>Cookie Tests</h1>
+      <img src="http://d.pr/i/Vmp+" style="max-width:100px;">
       <hr>
-      <p>Current state:</p>
-      <table class="table table-striped table-bordered" style="max-width:400px;">
+
+
+      <h3>Setup</h3>
+      <ol>
+        <li>Open another tab for the other domain, <a href="OTHER_DOMAIN", target="_blank">OTHER_DOMAIN</a></li>
+        <li>In both tabs, open the network inspector and tell it to preserve logs (see help section below)</li>
+        <li>In both tabs, clear any cookies that already exist (see help section below)</li>
+      </ol>
+      <hr>
+      <h3>State table:</h3>
+      <table class="table table-striped table-bordered" style="max-width:600px;">
         <tr>
           <td>
             You are currently on:
@@ -38,37 +48,44 @@
         </tr>
       </table>
 
-      <h3>Setup</h3>
-      <p>Open the chrome dev tools, and tell the network inspector to preserve the log.
-        This will allow you to see what's happening, even when following a redirect:</p>
-      <p><img src="http://d.pr/i/rkrJ+"></p>
-
-      <p>If you need to clear your cookies and start over, use the resoures tab:</p>
-
-      <p><img src="http://d.pr/i/lLrw+"></p>
-
       <hr>
       <h3>Redirect experiemnt</h3>
-      <p>Can cookies be set on a 302? Click the button to find out.  You will be redirected to <code>OTHER_DOMAIN</code>, then
-        you should come back to this page and the redirect cookie should exist.</p>
+      <p>This button will request <code>/redirect</code> on this domain, which will issue a 302 to <code>OTHER_DOMAIN</code> while also setting a cookie.</p>
+      <p>After the rediect, press the back button to come back here.  You should see a redirect cookie for this domain</p>
       <p>
         <a class="btn btn-primary btn-lg" href="/redirect">Redirect me</a>
       </p>
 
       <hr>
       <h3>AJAX (same domain) experiemnt</h3>
-      <p>Can cookies be set on an ajax request to the same domain? Click the button, then reload the page to see if the ajax cookie exists</p>
+      <p>This button will make an AJAx request to <code>AJAX_URI</code> on this domain.  The response will set a cookie, you can inspect that cookie immediately by refreshing the Resource inspector view, or you can reload the page to see it in the state table on this page.</p>
       <p>
         <a class="btn btn-success btn-lg" onClick="doAjax('THIS_DOMAIN');">Ajax me (THIS_DOMAIN)</a>
       </p>
 
       <hr>
       <h3>AJAX (cross-domain) experiemnt</h3>
-      <p>Can cookies be set on an ajax request to anoter domain? Click the button, then go to <a href="OTHER_DOMAIN">OTHER_DOMAIN</a> - when you arrive you should see the value of the cookie that was set during the button click</p>
-      <p>THIS IS NOT WORKING RIGHT NOW</p>
+      <p>This button will make an AJAX request to <code>OTHER_DOMAINAJAX_URI</code>
+      <p>After making this request, go to your tab for <code>OTHER_DOMAIN</code> and refresh the Resources view.  You should see the cookie that was set by this AJAX request</p>
       <p>
         <a class="btn btn-success btn-lg" onClick="doAjax('OTHER_DOMAIN');">Ajax me (OTHER_DOMAIN)</a>
       </p>
+
+      <hr>
+      <h3>Preserving network request logs</h3>
+      <p>
+        Open the chrome dev tools, go to the Network tab and tell it to preserve the log.
+        This will allow you to see what's happening, even when following a redirect:
+      </p>
+      <p><img src="http://d.pr/i/rkrJ+"></p>
+
+      <hr>
+      <h3>Viewing/clearing cookies</h3>
+      <p>
+        Open the chrome dev tools, then go to the Resources tab.  From there you can see what cookies exist for this domain, or clear them.
+        This view does NOT refresh itself when cookies are set, you have to use the refresh button that it has.
+      </p>
+      <p><img src="http://d.pr/i/Vf3u+"></p>
 
     </div>
   </body>
