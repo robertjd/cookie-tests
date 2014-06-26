@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      function doAjax(domain){
+        $.ajax('http://'+domain + ':PORT/ajax');
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <center>
+        <p>&nbsp;</p>
+        <p>
+          <a class="btn btn-primary btn-lg" href="/redirect">302 Redirect me!</a>
+        </p>
+        <p>
+          <a class="btn btn-success btn-lg" onClick="doAjax('THIS_DOMAIN');">Ajax me (THIS_DOMAIN)</a>
+        </p>
+        <p>
+          <a class="btn btn-success btn-lg" onClick="doAjax('OTHER_DOMAIN');">Ajax me (OTHER_DOMAIN)</a>
+        </p>
+        <p>Redirect Cookie: REDIRECT_COOKIE</p>
+        <p>Ajax Cookie: AJAX_COOKIE</p>
+        <h3>Watch the network</h3>
+        <p>Open the chrome dev tools, and tell the network inspector to preserve the log.  This will allow you to see what's happening:</p>
+        <img src="http://d.pr/i/rkrJ+">
+      </center>
+
+    </div>
+  </body>
+</html>
