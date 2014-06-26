@@ -63,7 +63,8 @@ function startServer(){
           .replace(/REDIRECT_COOKIE/g,cookies.get(REDIRECT_COOKIE_KEY) || 'Not Found')
           .replace(/AJAX_COOKIE/g,cookies.get(AJAX_COOKIE_KEY) || 'Not Found')
           .replace(/THIS_DOMAIN/g,THIS_DOMAIN)
-          .replace(/AJAX_URI/g, SCHEME + (IS_PRODUCTION ? AJAX_URI : (':'+PORT+AJAX_URI)))
+          .replace(/SCHEME/g,SCHEME)
+          .replace(/AJAX_URI/g, IS_PRODUCTION ? AJAX_URI : (':'+PORT+AJAX_URI))
           .replace(/OTHER_DOMAIN/g,OTHER_DOMAIN);
       res.end(page);
     }
