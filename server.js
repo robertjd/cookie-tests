@@ -44,7 +44,7 @@ function startServer(){
           'Access-Control-Allow-Origin': SCHEME + OTHER_DOMAIN
         });
       }else{
-        res.writeHead(302, {
+        res.writeHead(200, {
           'Cache-Control': 'no-store',
           'Pragma': 'no-cache',
           'Access-Control-Allow-Origin': SCHEME + OTHER_DOMAIN,
