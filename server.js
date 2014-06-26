@@ -41,13 +41,13 @@ function startServer(){
         res.writeHead(200, {
           'Cache-Control': 'no-store',
           'Pragma': 'no-cache',
-          'Access-Control-Allow-Origin': OTHER_DOMAIN
+          'Access-Control-Allow-Origin': SCHEME + OTHER_DOMAIN
         });
       }else{
         res.writeHead(302, {
           'Cache-Control': 'no-store',
           'Pragma': 'no-cache',
-          'Access-Control-Allow-Origin': OTHER_DOMAIN,
+          'Access-Control-Allow-Origin': SCHEME + OTHER_DOMAIN,
           'Set-Cookie': makeCookie(AJAX_COOKIE_KEY,uuid(),THIS_DOMAIN)
         });
       }
