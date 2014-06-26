@@ -10,27 +10,58 @@
   </head>
   <body>
     <div class="container">
-      <center>
-        <p>&nbsp;</p>
-        <p>
-          You are currently on:
-        </p>
-        <pre>THIS_DOMAIN</pre>
-        <p>
-          <a class="btn btn-primary btn-lg" href="/redirect">302 Redirect me!</a>
-        </p>
-        <p>
-          <a class="btn btn-success btn-lg" onClick="doAjax('THIS_DOMAIN');">Ajax me (THIS_DOMAIN)</a>
-        </p>
-        <p>
-          <a class="btn btn-success btn-lg" onClick="doAjax('OTHER_DOMAIN');">Ajax me (OTHER_DOMAIN)</a>
-        </p>
-        <p>Redirect Cookie: REDIRECT_COOKIE</p>
-        <p>Ajax Cookie: AJAX_COOKIE</p>
-        <h3>Watch the network</h3>
-        <p>Open the chrome dev tools, and tell the network inspector to preserve the log.  This will allow you to see what's happening:</p>
-        <img src="http://d.pr/i/rkrJ+">
-      </center>
+      <p>&nbsp;</p>
+      <h1>Cookie Tests</h1>
+      <hr>
+      <p>Current state:</p>
+      <table class="table table-striped table-bordered" style="max-width:400px;">
+        <tr>
+          <td>
+            You are currently on:
+          </td>
+          <td>
+            THIS_DOMAIN
+          </td>
+        </tr>
+        <tr>
+          <td>Redirect Cookie:</td><td>REDIRECT_COOKIE</td>
+        </tr>
+        <tr>
+          <td>Ajax Cookie (same domain):</td><td>AJAX_COOKIE</td>
+        </tr>
+      </table>
+
+      <h3>Setup</h3>
+      <p>Open the chrome dev tools, and tell the network inspector to preserve the log.
+        This will allow you to see what's happening, even when following a redirect:</p>
+      <p><img src="http://d.pr/i/rkrJ+"></p>
+
+      <p>If you need to clear your cookies and start over, use the resoures tab:</p>
+
+      <p><img src="http://d.pr/i/lLrw+"></p>
+
+      <hr>
+      <h3>Redirect experiemnt</h3>
+      <p>Can cookies be set on a 302? Click the button to find out.  You will be redirected to <code>OTHER_DOMAIN</code>, then
+        you should come back to this page and the redirect cookie should exist.</p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="/redirect">Redirect me</a>
+      </p>
+
+      <hr>
+      <h3>AJAX (same domain) experiemnt</h3>
+      <p>Can cookies be set on an ajax request to the same domain? Click the button, then reload the page to see if the ajax cookie exists</p>
+      <p>
+        <a class="btn btn-success btn-lg" onClick="doAjax('THIS_DOMAIN');">Ajax me (THIS_DOMAIN)</a>
+      </p>
+
+      <hr>
+      <h3>AJAX (cross-domain) experiemnt</h3>
+      <p>Can cookies be set on an ajax request to anoter domain? Click the button, then go to <a href="SCHEMEOTHER_DOMAIN">OTHER_DOMAIN</a> - when you arrive you should see the value of the cookie that was set during the button click</p>
+      <p>THIS IS NOT WORKING RIGHT NOW</p>
+      <p>
+        <a class="btn btn-success btn-lg" onClick="doAjax('THIS_DOMAIN');">Ajax me (OTHER_DOMAIN)</a>
+      </p>
 
     </div>
   </body>
