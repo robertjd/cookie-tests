@@ -10,7 +10,7 @@ var IS_PRODUCTION = process.env.NODE_ENV==='production';
 
 var PORT = process.env.PORT || 8001;
 
-
+var SCHEME = process.env.SCHEME || 'http://';
 var THIS_DOMAIN = process.env.THIS_DOMAIN || 'a.com';
 var OTHER_DOMAIN = process.env.OTHER_DOMAIN || 'b.com';
 
@@ -32,7 +32,7 @@ function startServer(){
       res.writeHead(302, {
         'Cache-Control': 'no-store',
         'Pragma': 'no-cache',
-        'Location': OTHER_DOMAIN,
+        'Location': SCHEME + OTHER_DOMAIN,
         'Set-Cookie': makeCookie(REDIRECT_COOKIE_KEY,uuid(),THIS_DOMAIN)
       });
       res.end();
@@ -47,6 +47,7 @@ function startServer(){
         res.writeHead(302, {
           'Cache-Control': 'no-store',
           'Pragma': 'no-cache',
+          'Access-Control-Allow-Origin': OTHER_DOMAIN,
           'Set-Cookie': makeCookie(AJAX_COOKIE_KEY,uuid(),THIS_DOMAIN)
         });
       }
