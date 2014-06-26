@@ -72,7 +72,7 @@ function startServer(){
     }
   });
 
-  console.log('Server running on port '+PORT);
+  console.log('Server running on port '+PORT+ ' in environment' + process.env.NODE_ENV);
 }
 
 startServer();
